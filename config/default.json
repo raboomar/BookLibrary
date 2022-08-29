@@ -1,3 +1,4 @@
 {
-  "mongoURL": "mongodb+srv://aboomar:password1!@cluster0.ncduuez.mongodb.net/?retryWrites=true&w=majority"
+  "mongoURL": "mongodb+srv://aboomar:password1!@cluster0.ncduuez.mongodb.net/?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }
