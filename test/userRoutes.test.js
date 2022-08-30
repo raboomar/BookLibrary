@@ -6,11 +6,21 @@ describe("Post /new user", () => {
     test("should respond with a 200 status code", async () => {
       const res = await request(app).post("/api/v1/user").send({
         name: "test",
+        email: "test@gmail.com",
+        password: "test123455",
+      });
+      expect(res.statusCode).toEqual(200);
+    });
+
+    test("should have json in the content type header", async () => {
+      const res = await request(app).post("/api/v1/user").send({
+        name: "test",
         email: "testgmail.com",
         password: "test123455",
       });
-
-      expect(res.statusCode).toEqual(200);
+      expect(res.headers["content-type"]).toEqual(
+        expect.stringContaining("json")
+      );
     });
   });
 
