@@ -1,5 +1,6 @@
 const request = require("supertest");
 const app = require("../app");
+const DB = require("../config/db");
 
 describe("Post /new user", () => {
   describe("given a valid name, email, and email", () => {
@@ -47,5 +48,9 @@ describe("Post /new user", () => {
         expect(res.statusCode).toBe(400);
       }
     });
+  });
+
+  afterAll((done) => {
+    DB.disconnect(done);
   });
 });

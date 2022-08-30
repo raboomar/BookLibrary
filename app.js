@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const v1UserRouter = require("./src/routes/userRoutes");
 const bodyParser = require("body-parser");
+const DB = require("./config/db");
 
-const connectDB = require("./config/db");
-connectDB();
+DB.connectDB();
 app.get("/", (req, res) => {
   res.send("App running");
 });
