@@ -36,11 +36,16 @@ describe("Post /new user", () => {
 
   describe("when a name, email, or password is missing", () => {
     test("should respond with a status code of 400", async () => {
-      const res = await request(app).post("/api/v1/user").send({
-        name: "test",
-        password: "test123455",
-      });
-      expect(res.statusCode).toBe(400);
+      const bodyData = [
+        { name: "test", password: "test123455" },
+        { email: "test1@gmail.com", password: "test123455" },
+        { password: "test123455" },
+      ];
+
+      for (const jsonBody of bodyData) {
+        const res = await request(app).post("/api/v1/user").send(jsonBody);
+        expect(res.statusCode).toBe(400);
+      }
     });
   });
 });
