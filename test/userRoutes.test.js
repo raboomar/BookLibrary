@@ -15,14 +15,32 @@ describe("Post /new user", () => {
     test("should have json in the content type header", async () => {
       const res = await request(app).post("/api/v1/user").send({
         name: "test",
-        email: "testgmail.com",
+        email: "test2@gmail.com",
         password: "test123455",
       });
       expect(res.headers["content-type"]).toEqual(
         expect.stringContaining("json")
       );
     });
+
+    test("should have a token in response ", async () => {
+      const res = await request(app).post("/api/v1/user").send({
+        name: "test",
+        email: "test1@gmail.com",
+        password: "test123455",
+      });
+
+      expect(res.body.token).toBeDefined();
+    });
   });
 
-  describe("when a name, email, or password is missing", () => {});
+  describe("when a name, email, or password is missing", () => {
+    test("should respond with a status code of 400", async () => {
+      const res = await request(app).post("/api/v1/user").send({
+        name: "test",
+        password: "test123455",
+      });
+      expect(res.statusCode).toBe(400);
+    });
+  });
 });
