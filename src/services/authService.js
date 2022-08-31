@@ -2,6 +2,7 @@ const User = require("../models/Users");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const config = require("config");
 const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
