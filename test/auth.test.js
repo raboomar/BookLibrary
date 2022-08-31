@@ -12,6 +12,18 @@ describe("Get /Auth user", () => {
       expect(response.statusCode).toEqual(200);
     });
   });
+  test("should return a json obj with userId, name, and email", async () => {
+    const response = await request(app)
+      .get("/api/v1/auth")
+      .set("x-auth-token", process.env.AUTH_TOKEN);
+
+    expect(response.body).toEqual({
+      _id: expect.any(String),
+      name: expect.any(String),
+      email: expect.any(String),
+      __v: 0,
+    });
+  });
   afterAll((done) => {
     DB.disconnect(done);
   });
