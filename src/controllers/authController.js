@@ -4,4 +4,8 @@ const getUser = async (req, res) => {
   authService.getUser(req, res);
 };
 
-module.exports = { getUser };
+const loginUser = async (req, res) => {
+  authService.loginUser(req, res);
+};
+
+module.exports = { getUser, loginUser };

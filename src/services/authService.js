@@ -1,5 +1,5 @@
 const User = require("../models/Users");
-
+const { validationResult } = require("express-validator");
 const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -10,4 +10,11 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { getUser };
+const loginUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+};
+
+module.exports = { getUser, loginUser };
