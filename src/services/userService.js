@@ -20,6 +20,7 @@ const createNewUser = async (req, res) => {
       name,
       email,
       password,
+      books: [],
     });
 
     const salt = await bcrypt.genSalt(10);
