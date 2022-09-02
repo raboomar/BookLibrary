@@ -19,4 +19,6 @@ router.post(
 
 router.delete("/:bookId", auth, bookController.deleteBook);
 
+router.put("/;bookId", bookController.editBook);
+
 module.exports = router;
