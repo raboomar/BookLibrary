@@ -1,8 +1,8 @@
 import "./App.css";
-import LandingPAge from "./landing/LandingPAge";
-import { Navbar } from "./navbar/Navbar";
-import LoginPage from "./auth/pages/LoginPage";
-import RegisterPage from "./auth/pages/RegisterPage";
+import LandingPAge from "./pages/landing/LandingPAge";
+import { Navbar } from "./components/navbar/Navbar";
+import LoginPage from "./pages/auth/pages/LoginPage";
+import RegisterPage from "./pages/auth/pages/RegisterPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
