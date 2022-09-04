@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import registerUser from "../logic/registerUser";
 import "./register.css";
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -26,22 +26,7 @@ const RegisterPage = () => {
         email,
         password,
       };
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-        const body = JSON.stringify(newUser);
-        const res = await axios.post(
-          "http://localhost:5001/api/v1/user",
-          body,
-          config
-        );
-        console.log(res.data);
-      } catch (error) {
-        console.error(error);
-      }
+      registerUser(newUser);
     }
   };
 
