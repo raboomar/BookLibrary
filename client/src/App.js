@@ -1,13 +1,16 @@
 import "./App.css";
 import LandingPAge from "./landing/LandingPAge";
 import { Navbar } from "./navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
-      <LandingPAge />
-    </>
+      <Routes>
+        <Route path="/" element={<LandingPAge />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
