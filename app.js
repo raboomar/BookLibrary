@@ -5,7 +5,8 @@ const v1AuthRouter = require("./src/routes/authRoutes");
 const v1BooksRouter = require("./src/routes/bookRoutes");
 const bodyParser = require("body-parser");
 const DB = require("./config/db");
-
+var cors = require("cors");
+app.use(cors());
 DB.connectDB();
 app.get("/", (req, res) => {
   res.send("App running");
