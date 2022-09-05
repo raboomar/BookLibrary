@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import registerUser from "../logic/registerUser";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast, Toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { register, reset } from "../../../features/auth/authSlice";
 import "./register.css";
 import { useEffect } from "react";
