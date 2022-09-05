@@ -19,8 +19,28 @@ const register = async (user) => {
 const logout = async () => {
   localStorage.removeItem("user");
 };
+
+const login = async (user) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify(user);
+  const res = await axios.post(
+    "http://localhost:5001/api/v1/auth",
+    body,
+    config
+  );
+  if (res.data) {
+    localStorage.setItem("user", JSON.stringify(res.data));
+  }
+  return res.data;
+};
+
 const authService = {
   register,
   logout,
+  login,
 };
 export default authService;
