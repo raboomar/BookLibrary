@@ -2,8 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import registerUser from "../logic/registerUser";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast, Toast } from "react-toastify";
+import { register, reset } from "../../../features/auth/authSlice";
 import "./register.css";
+import { useEffect } from "react";
+import Loading from "../../../components/loading/Loading";
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,10 +26,21 @@ const RegisterPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password != password2) {
-      console.log("passwords do not match");
+      toast.error("passwords fo not match");
     } else {
       console.log(formData);
       const newUser = {
@@ -27,9 +48,13 @@ const RegisterPage = () => {
         email,
         password,
       };
-      registerUser(newUser);
+      dispatch(register(newUser));
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <section className="container">
