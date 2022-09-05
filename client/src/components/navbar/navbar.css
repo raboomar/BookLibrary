@@ -28,3 +28,8 @@
   .navbar .welcome span {
     margin-right: 0.6rem;
   }
+  .btn-logout{
+    color: var(--text-color);
+    border: none  ;
+    background-color: inherit;
+  }
