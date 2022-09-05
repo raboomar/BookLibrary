@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import registerUser from "../logic/registerUser";
+import { useSelector, useDispatch } from "react-redux";
 import "./register.css";
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
