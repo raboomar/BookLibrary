@@ -15,10 +15,10 @@ const AddBookForm = () => {
 
   const handleSubmit = () => {};
   return (
-    <div className="form">
+    <div className="form addBook-form">
       <form onSubmit={handleSubmit}>
-        <h4>Add new book</h4>
         <div className="form-group">
+          <h4 className="addNewBook-title">Add new book</h4>
           <label htmlFor="text"> Title</label>
           <input
             type="text"
