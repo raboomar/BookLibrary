@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./dashboard.css";
 import NewBookBtn from "../../components/addNewBookBtn/NewBookBtn";
+import AddBookForm from "../addBookForm/AddBookForm";
+import Modal from "../../components/modal/Modal";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -29,6 +31,7 @@ const Dashboard = () => {
   return (
     <>
       <NewBookBtn />
+      <Modal children={<AddBookForm />} />
       <div className="grid-container ">
         {books.map((book) => (
           <div className="grid-item">
