@@ -13,15 +13,13 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div className="grid-container">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<LandingPAge />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LandingPAge />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
       </BrowserRouter>
       <ToastContainer />
     </>
