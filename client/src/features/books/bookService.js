@@ -13,8 +13,22 @@ const addBook = async (book, token) => {
   return response.data;
 };
 
+const getBooks = async (token) => {
+  const url = "http://localhost:5001/api/v1/books/myBooks";
+  const config = {
+    headers: {
+      "x-auth-token": token,
+    },
+  };
+
+  const response = await axios.get(url, config);
+
+  return response.data;
+};
+
 const bookService = {
   addBook,
+  getBooks,
 };
 
 export default bookService;
