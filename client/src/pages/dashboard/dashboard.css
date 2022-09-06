@@ -30,8 +30,8 @@ border-radius: 8px;
     width: 100%;
     padding: 5px;
     margin-top: 5px;
-    color: var(--text-color);
-    background-color:#d5b281;
+    color: var(--primary-color);
+    background-color: var(--btn-color)
 }
 .dashboard-book-btn:hover{
     cursor: pointer;

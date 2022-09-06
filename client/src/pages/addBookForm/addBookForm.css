@@ -1,18 +1,23 @@
 .addBook-btn{
     border: none;
     border-radius: 8px;
-        display: block;
-        width: 100%;
-        padding: 5px;
-        margin-top: 5px;
-        color: var(--text-color);
-        background-color:#d5b281;
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    color: var(--primary-color);
+    background-color:var(--btn-color)
+}
+.addBook-btn:hover{
+cursor: pointer;
 }
 .addBook-form{
-
     margin-top: 50px;
-
 }
 .addNewBook-title{
     text-align: center;
+    font-weight: bold;
+}
+input{
+border-radius: 8px;
 }

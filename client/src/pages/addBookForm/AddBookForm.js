@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { addBook } from "../../features/books/bookSlice";
+import { dontShow } from "../../features/modal/modalSlice";
 import "./addBookForm.css";
 const AddBookForm = () => {
+  const dispatch = useDispatch();
   const [book, setBook] = useState({
     title: "",
     author: "",
@@ -12,13 +15,20 @@ const AddBookForm = () => {
   const handleChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
+  const handleClick = (e) => {
+    setBook({ ...book, readIt: readIt ? false : true });
+  };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addBook(book));
+    dispatch(dontShow());
+  };
   return (
     <div className="form addBook-form">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <h4 className="addNewBook-title">Add new book</h4>
+          <h3 className="addNewBook-title">Add new book</h3>
           <label htmlFor="text"> Title</label>
           <input
             type="text"
@@ -48,7 +58,7 @@ const AddBookForm = () => {
             name="readIt"
             value={readIt}
             onChange={(e) => {
-              handleChange(e);
+              handleClick(e);
             }}
           />
           <label htmlFor="text">Have you read it?</label>
