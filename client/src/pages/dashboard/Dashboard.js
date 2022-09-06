@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./dashboard.css";
-import NewBookBtn from "./NewBookBtn";
+import NewBookBtn from "../../components/addNewBookBtn/NewBookBtn";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -36,7 +36,9 @@ const Dashboard = () => {
               <h4 className="book-name large  ">{book.title}</h4>
               <h5 className="book-author lead">{book.author}</h5>
               <button className="dashboard-book-btn lead"> Read</button>
-              <button className="dashboard-book-btn lead ">Remove</button>
+              <button className="dashboard-book-btn lead remove-btn ">
+                Remove
+              </button>
             </div>
           </div>
         ))}
