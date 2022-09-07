@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./dashboard.css";
@@ -9,9 +9,12 @@ import { getBooks, reset, deleteBook } from "../../features/books/bookSlice";
 import Loading from "../../components/loading/Loading";
 import NoBooks from "../../components/noBooks/NoBooks";
 import { toast } from "react-toastify";
+import { show, showEdit } from "../../features/modal/modalSlice";
+import EditBookForm from "../editBookForm/EditBookForm";
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [currentBook, setCurrentBook] = useState({});
   const { user } = useSelector((state) => state.auth);
   const { books, isLoading, isError, message } = useSelector(
     (state) => state.books
@@ -34,7 +37,11 @@ const Dashboard = () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
+  const edit = (book) => {
+    setCurrentBook(book);
 
+    dispatch(showEdit());
+  };
   if (isLoading) {
     return <Loading />;
   }
@@ -53,6 +60,8 @@ const Dashboard = () => {
     <>
       <NewBookBtn />
       <Modal children={<AddBookForm />} />
+
+      <EditBookForm currentBook={currentBook} />
       <div className="grid-container ">
         {books.map((book) => (
           <div className="grid-item" key={book._id}>
@@ -64,8 +73,14 @@ const Dashboard = () => {
               ) : (
                 <h5 className="book-author lead">Read: No</h5>
               )}
-
-              <button className="dashboard-book-btn lead"> Edit</button>
+              <button
+                className="dashboard-book-btn lead"
+                onClick={() => {
+                  edit(book);
+                }}
+              >
+                Edit
+              </button>
               <button
                 className="dashboard-book-btn lead remove-btn "
                 onClick={(e) => {
