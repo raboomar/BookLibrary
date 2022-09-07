@@ -39,10 +39,25 @@ const deleteBook = async (bookId, token) => {
   return response.data;
 };
 
+const editBook = async (book, bookId, token) => {
+  const url = `http://localhost:5001/api/v1/books/${bookId}`;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  const body = JSON.stringify(book);
+
+  const response = await axios.put(url, body, config);
+  return response.data;
+};
+
 const bookService = {
   addBook,
   getBooks,
   deleteBook,
+  editBook,
 };
 
 export default bookService;

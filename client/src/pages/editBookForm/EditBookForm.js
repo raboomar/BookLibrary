@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { dontShowEdit } from "../../features/modal/modalSlice";
+import { editBook } from "../../features/books/bookSlice";
 const EditBookForm = ({ currentBook }) => {
   const dispatch = useDispatch();
   const { editModal } = useSelector((state) => state.showModal);
+  const { isLoading, isError, message } = useSelector((state) => state.books);
+
   const [book, setBook] = useState({
     title: currentBook.title,
     author: "",
@@ -23,6 +26,16 @@ const EditBookForm = ({ currentBook }) => {
       readIt: currentBook.readIt,
     });
   }, [currentBook]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const bookData = {
+      book,
+      bookId: currentBook._id,
+    };
+    dispatch(editBook(bookData));
+    dispatch(dontShowEdit());
+  };
   return (
     <>
       {editModal ? (
@@ -38,7 +51,7 @@ const EditBookForm = ({ currentBook }) => {
             </span>
 
             <div className="form addBook-form">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <h3 className="addNewBook-title">Update</h3>
                   <label htmlFor="text"> Title</label>
@@ -68,6 +81,7 @@ const EditBookForm = ({ currentBook }) => {
                   <input
                     type="checkbox"
                     name="readIt"
+                    value={readIt}
                     checked={readIt}
                     onChange={(e) => {
                       handleClick(e);
