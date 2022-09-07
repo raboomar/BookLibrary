@@ -42,6 +42,25 @@ export const getBooks = createAsyncThunk(
   }
 );
 
+export const deleteBook = createAsyncThunk(
+  "books/delete",
+  async (bookId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await bookService.deleteBook(bookId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const booksSlice = createSlice({
   name: "books",
   initialState,
