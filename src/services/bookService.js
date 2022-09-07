@@ -71,6 +71,37 @@ const deleteBook = async (req, res) => {
   }
 };
 
-const editBook = async (req, res) => {};
+const editBook = async (req, res) => {
+  const bookId = req.params.bookId;
+  const { title, author, readIt } = req.body;
+
+  try {
+    let book = await Books.findById(bookId);
+
+    const updatedBook = {
+      user: req.user.id,
+      title,
+      author,
+      readIt,
+    };
+    if (book.title != title) {
+      updatedBook.title = title;
+    }
+    if (book.author != author) {
+      updatedBook.author = author;
+    }
+    if (book.readIt != readIt) {
+      updatedBook.readIt = readIt;
+    }
+
+    await Books.findByIdAndUpdate(bookId, updatedBook, {
+      new: true,
+    });
+    res.status(200).json(updatedBook);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("server error");
+  }
+};
 
 module.exports = { getBooks, addBook, deleteBook, editBook };
