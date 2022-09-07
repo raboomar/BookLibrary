@@ -33,7 +33,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error("Invalid credentials");
     }
     if (isSuccess || user) {
       navigate("/dashboard");

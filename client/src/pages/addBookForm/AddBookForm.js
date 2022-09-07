@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addBook } from "../../features/books/bookSlice";
 import { dontShow } from "../../features/modal/modalSlice";
+import { toast } from "react-toastify";
 import "./addBookForm.css";
 const AddBookForm = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const AddBookForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addBook(book));
+    toast.success("Book added");
     dispatch(dontShow());
   };
   return (

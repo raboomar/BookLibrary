@@ -8,6 +8,7 @@ import Modal from "../../components/modal/Modal";
 import { getBooks, reset, deleteBook } from "../../features/books/bookSlice";
 import Loading from "../../components/loading/Loading";
 import NoBooks from "../../components/noBooks/NoBooks";
+import { toast } from "react-toastify";
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Dashboard = () => {
 
   const removeBook = (bookId) => {
     dispatch(deleteBook(bookId));
+    toast.success("Book removed");
   };
   useEffect(() => {
     if (isError) {
