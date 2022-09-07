@@ -49,7 +49,7 @@ const addBook = async (req, res) => {
     user.books.push(book);
     await user.save({ session: session });
     await session.commitTransaction();
-    res.status(200).json({ msg: "Book added" });
+    res.json(book);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("server error");
@@ -59,11 +59,12 @@ const addBook = async (req, res) => {
 const deleteBook = async (req, res) => {
   const bookId = req.params.bookId;
   try {
+    let book = await Books.findById(bookId);
     let user = await User.findById(req.user.id);
     user.books.pull(bookId);
     await user.save();
-    await Books.findOneAndRemove({ bookId });
-    res.json({ msg: "Deleted book" });
+    await book.remove();
+    res.status(200).json({ id: bookId });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("server error");
