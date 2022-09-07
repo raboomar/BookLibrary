@@ -37,33 +37,45 @@ const Dashboard = () => {
     return <Loading />;
   }
 
+  if (books.length === 0) {
+    return (
+      <>
+        <NewBookBtn />
+        <NoBooks />
+        <Modal children={<AddBookForm />} />
+      </>
+    );
+  }
+
   return (
     <>
       <NewBookBtn />
       <Modal children={<AddBookForm />} />
-      {books.length > 0 ? (
-        books.map((book) => (
-          <div className="grid-container ">
-            <div className="grid-item" key={book._id}>
-              <div className="card">
-                <h4 className="book-name large  ">{book.title}</h4>
-                <h5 className="book-author lead">{book.author}</h5>
-                <button className="dashboard-book-btn lead"> Read</button>
-                <button
-                  className="dashboard-book-btn lead remove-btn "
-                  onClick={(e) => {
-                    removeBook(book._id);
-                  }}
-                >
-                  Remove
-                </button>
-              </div>
+      <div className="grid-container ">
+        {books.map((book) => (
+          <div className="grid-item" key={book._id}>
+            <div className="card">
+              <h4 className="book-name large  ">{book.title}</h4>
+              <h5 className="book-author lead">{book.author}</h5>
+              {book.readIt ? (
+                <h5 className="book-author lead"> Read: Yes</h5>
+              ) : (
+                <h5 className="book-author lead">Read: No</h5>
+              )}
+
+              <button className="dashboard-book-btn lead"> Edit</button>
+              <button
+                className="dashboard-book-btn lead remove-btn "
+                onClick={(e) => {
+                  removeBook(book._id);
+                }}
+              >
+                Remove
+              </button>
             </div>
           </div>
-        ))
-      ) : (
-        <NoBooks />
-      )}
+        ))}
+      </div>
     </>
   );
 };
