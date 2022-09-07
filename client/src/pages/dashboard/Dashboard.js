@@ -31,7 +31,7 @@ const Dashboard = () => {
   if (isLoading) {
     return <Loading />;
   }
-
+  console.log(books);
   return (
     <>
       <NewBookBtn />
@@ -39,7 +39,7 @@ const Dashboard = () => {
       <div className="grid-container ">
         {books.length > 0 ? (
           books.map((book) => (
-            <div className="grid-item">
+            <div className="grid-item" key={book._id}>
               <div className="card">
                 <h4 className="book-name large  ">{book.title}</h4>
                 <h5 className="book-author lead">{book.author}</h5>

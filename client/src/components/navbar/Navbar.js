@@ -23,24 +23,26 @@ export const Navbar = () => {
         </Link>
       </h1>
       <ul>
-        <li>
-          <Link to="/dashboard">
-            <i className="fas fa-user"></i>
-            <span className="hide-sm">Dashboard</span>
-          </Link>
-        </li>
         {user ? (
-          <li>
-            <button
-              className="btn-logout"
-              onClick={() => {
-                handleLogout();
-              }}
-            >
-              <i className="fas fa-sign-out-alt"></i>
-              <span className="hide-sm">Logout</span>
-            </button>
-          </li>
+          <>
+            <li>
+              <Link to="/dashboard">
+                <i className="fas fa-user"></i>
+                <span className="hide-sm">Dashboard</span>
+              </Link>
+            </li>
+            <li>
+              <button
+                className="btn-logout"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                <i className="fas fa-sign-out-alt"></i>
+                <span className="hide-sm">Logout</span>
+              </button>
+            </li>
+          </>
         ) : (
           <>
             <li>
