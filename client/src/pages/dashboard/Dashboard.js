@@ -7,6 +7,7 @@ import AddBookForm from "../addBookForm/AddBookForm";
 import Modal from "../../components/modal/Modal";
 import { getBooks, reset, deleteBook } from "../../features/books/bookSlice";
 import Loading from "../../components/loading/Loading";
+import NoBooks from "../../components/noBooks/NoBooks";
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,9 +41,9 @@ const Dashboard = () => {
     <>
       <NewBookBtn />
       <Modal children={<AddBookForm />} />
-      <div className="grid-container ">
-        {books.length > 0 ? (
-          books.map((book) => (
+      {books.length > 0 ? (
+        books.map((book) => (
+          <div className="grid-container ">
             <div className="grid-item" key={book._id}>
               <div className="card">
                 <h4 className="book-name large  ">{book.title}</h4>
@@ -58,11 +59,11 @@ const Dashboard = () => {
                 </button>
               </div>
             </div>
-          ))
-        ) : (
-          <h1> no books added yet</h1>
-        )}
-      </div>
+          </div>
+        ))
+      ) : (
+        <NoBooks />
+      )}
     </>
   );
 };
