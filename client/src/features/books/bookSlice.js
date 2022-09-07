@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import bookService from "./bookService";
-const books = JSON.parse(localStorage.getItem("books"));
+
 const initialState = {
   books: [],
   isError: false,
@@ -124,7 +124,7 @@ export const booksSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.books = state.books.filter(
-          (book) => book._id != actions.payload.id
+          (book) => book._id !== actions.payload.id
         );
       })
       .addCase(deleteBook.rejected, (state, actions) => {

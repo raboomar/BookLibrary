@@ -9,7 +9,7 @@ import { getBooks, reset, deleteBook } from "../../features/books/bookSlice";
 import Loading from "../../components/loading/Loading";
 import NoBooks from "../../components/noBooks/NoBooks";
 import { toast } from "react-toastify";
-import { show, showEdit } from "../../features/modal/modalSlice";
+import { showEdit } from "../../features/modal/modalSlice";
 import EditBookForm from "../editBookForm/EditBookForm";
 const Dashboard = () => {
   const navigate = useNavigate();

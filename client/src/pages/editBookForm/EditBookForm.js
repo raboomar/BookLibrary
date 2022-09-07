@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { dontShowEdit } from "../../features/modal/modalSlice";
 import { editBook } from "../../features/books/bookSlice";
+import { toast } from "react-toastify";
 const EditBookForm = ({ currentBook }) => {
   const dispatch = useDispatch();
   const { editModal } = useSelector((state) => state.showModal);
-  const { isLoading, isError, message } = useSelector((state) => state.books);
 
   const [book, setBook] = useState({
     title: currentBook.title,
@@ -35,6 +35,7 @@ const EditBookForm = ({ currentBook }) => {
     };
     dispatch(editBook(bookData));
     dispatch(dontShowEdit());
+    toast.success(`${book.title} updated.`);
   };
   return (
     <>
