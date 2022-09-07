@@ -5,7 +5,7 @@ import "./dashboard.css";
 import NewBookBtn from "../../components/addNewBookBtn/NewBookBtn";
 import AddBookForm from "../addBookForm/AddBookForm";
 import Modal from "../../components/modal/Modal";
-import { getBooks, reset } from "../../features/books/bookSlice";
+import { getBooks, reset, deleteBook } from "../../features/books/bookSlice";
 import Loading from "../../components/loading/Loading";
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,6 +14,10 @@ const Dashboard = () => {
   const { books, isLoading, isError, message } = useSelector(
     (state) => state.books
   );
+
+  const removeBook = (bookId) => {
+    dispatch(deleteBook(bookId));
+  };
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -31,7 +35,7 @@ const Dashboard = () => {
   if (isLoading) {
     return <Loading />;
   }
-  console.log(books);
+
   return (
     <>
       <NewBookBtn />
@@ -44,7 +48,12 @@ const Dashboard = () => {
                 <h4 className="book-name large  ">{book.title}</h4>
                 <h5 className="book-author lead">{book.author}</h5>
                 <button className="dashboard-book-btn lead"> Read</button>
-                <button className="dashboard-book-btn lead remove-btn ">
+                <button
+                  className="dashboard-book-btn lead remove-btn "
+                  onClick={(e) => {
+                    removeBook(book._id);
+                  }}
+                >
                   Remove
                 </button>
               </div>

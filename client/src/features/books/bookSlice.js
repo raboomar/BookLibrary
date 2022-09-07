@@ -95,6 +95,21 @@ export const booksSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = actions.payload;
+      })
+      .addCase(deleteBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteBook.fulfilled, (state, actions) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.books = state.books.filter(
+          (book) => book._id != actions.payload.id
+        );
+      })
+      .addCase(deleteBook.rejected, (state, actions) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = actions.payload;
       });
   },
 });
