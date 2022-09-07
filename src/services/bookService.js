@@ -97,7 +97,8 @@ const editBook = async (req, res) => {
     await Books.findByIdAndUpdate(bookId, updatedBook, {
       new: true,
     });
-    res.status(200).json(updatedBook);
+    const newBookList = await Books.find({ user: req.user.id });
+    res.status(200).json(newBookList);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("server error");
