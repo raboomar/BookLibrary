@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5001/api/v1/user";
+const API_URL = "/api/v1/user";
 
 const register = async (user) => {
   const config = {
@@ -27,11 +27,7 @@ const login = async (user) => {
     },
   };
   const body = JSON.stringify(user);
-  const res = await axios.post(
-    "http://localhost:5001/api/v1/auth",
-    body,
-    config
-  );
+  const res = await axios.post("/api/v1/auth", body, config);
   if (res.data) {
     localStorage.setItem("user", JSON.stringify(res.data));
   }
