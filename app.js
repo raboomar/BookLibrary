@@ -10,9 +10,6 @@ const path = require("path");
 require("dotenv").config();
 app.use(cors());
 DB.connectDB();
-// app.get("/", (req, res) => {
-//   res.send("App running");
-// });
 app.use(bodyParser.json());
 app.use("/api/v1/user", v1UserRouter);
 app.use("/api/v1/auth", v1AuthRouter);
